@@ -13,11 +13,11 @@ I didn't just move files around. I fundamentally changed how the app is put toge
 - I used a more stable hashing method for the fake embeddings so that the same text always gives you the same vector.
 
 ## Project Structure
-src/
-├── api/            # API endpoints (FastAPI)
-├── domain/         # The "blueprint" (Interfaces & Schemas)
-├── infrastructure/ # Tools (Qdrant, Embedding, Memory)
-└── services/       # The AI Engine (LangGraph workflow)
+- src/api/: All the FastAPI stuff (routes and endpoints).
+- src/core/: Boring but important stuff like config and logging.
+- src/domain/: The "brains" — schemas and the rules (interfaces) for the app.
+- src/infrastructure/: The actual tools, like the Qdrant client and embedding service.
+- src/services/: The RAG Engine that runs the LangGraph workflow.
 
 ## Getting Started
 If you want to run this locally, it's pretty straightforward:
