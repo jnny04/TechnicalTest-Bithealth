@@ -1,14 +1,15 @@
-from typing import List, Dict, Any
+from typing import List
+from src.domain.models import Document
 
 class InMemoryStore:
     def __init__(self):
-        self.docs: List[Dict[str, Any]] = []
+        self.docs = []
 
-    def add(self, doc_id: int, vector: List[float], text: str) -> bool:
+    def add(self, document: Document) -> bool:
         self.docs.append({
-            "id": doc_id,
-            "vector": vector,
-            "text": text
+            'id': document.id,
+            'vector': document.vector,
+            'text': document.text
         })
         return True
     
