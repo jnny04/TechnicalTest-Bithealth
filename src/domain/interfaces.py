@@ -1,5 +1,8 @@
-from typing import Protocol, List
+from typing import Protocol, List, Optional
 from src.domain.models import Document
+
+class EmbeddingService(Protocol):
+    def embed(self, text: str) -> List[float]: ...
 
 class DocumentStore(Protocol):
     def add(self, document: Document) -> bool: ...
