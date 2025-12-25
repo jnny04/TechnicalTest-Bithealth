@@ -15,15 +15,17 @@ I didn't just move files around. I fundamentally changed how the app is put toge
 ## Project Structure
 - src/api/: All the FastAPI stuff (routes and endpoints).
 - src/core/: Boring but important stuff like config and logging.
-- src/domain/: The "brains" — schemas and the rules (interfaces) for the app.
+- src/domain/: The "brains" schemas and the rules (interfaces) for the app.
 - src/infrastructure/: The actual tools, like the Qdrant client and embedding service.
 - src/services/: The RAG Engine that runs the LangGraph workflow.
 
 ## Getting Started
 If you want to run this locally, it's pretty straightforward:
-1. Install the goods: pip install -r requirements.txt
-2. Fire it up: uvicorn main:app --reload
-3. Check the docs: Head over to http://localhost:8000/docs to play with the /ask and /add endpoints.
+1. Create a virtual environment: python -m venv venv
+2. Activate the environment: venv\Scripts\activate (Windows), source venv/bin/activate (Mac/Linux)
+3. Install the goods: pip install -r requirements.txt
+4. Fire it up: uvicorn main:app --reload
+5. Check the docs: Head over to http://localhost:8000/docs to play with the /ask and /add endpoints.
 
 ## Thinking Process
 I wrote a separate **notes.md** file that explains my design choices, the trade-offs I made, and why I built it this way. Definitely give that a read if you want to see how I think about code quality!
