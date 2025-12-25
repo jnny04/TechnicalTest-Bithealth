@@ -2,6 +2,7 @@ import uuid
 from typing import TypedDict, List
 from langgraph.graph import StateGraph, END
 from src.domain.interfaces import DocumentStore, EmbeddingService
+from src.domain.models import Document
 
 class GraphState(TypedDict):
     question: str
@@ -45,8 +46,9 @@ class RagEngine:
     # Coordinate embedding process and document storage
     def add_document(self, text: str) -> int:
         doc_id = uuid.uuid4().int >> 96
-        vector = self.embedder.embed(text)
-        self.storage.add(doc_id, vector, text)
+        vector = self.embedder.embed(text)        
+        new_doc = Document(id=doc_id, vector=vector, text=text)        
+        self.storage.add(new_doc)
         return doc_id
 
     # Execute the RAG workflow
