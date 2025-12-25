@@ -2,6 +2,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import PointStruct, VectorParams, Distance
 from src.core.config import settings
 from src.core.logger import logger
+from src.domain.models import Document
 from typing import List
 
 class QdrantStore:
@@ -29,22 +30,22 @@ class QdrantStore:
         except Exception as e:
             logger.error(f"Failed to initialize Qdrant: {e}") 
             raise e
-
-    def add(self, doc_id: int, vector: List[float], text: str) -> bool:
+        
+    def add(self, document: Document) -> bool:
         try:
             self.client.upsert(
                 collection_name=self.collection,
                 points=[
                     PointStruct(
-                        id=doc_id, 
-                        vector=vector, 
-                        payload={"text": text}
+                        id=document.id, 
+                        vector=document.vector, 
+                        payload={'text': document.text, **document.metadata}
                     )
                 ]
             )
             return True
         except Exception as e:
-            logger.error(f"Failed to add document to Qdrant: {e}")
+            logger.error(f'Failed to add document to Qdrant: {e}')
             return False
 
     def search(self, vector: List[float], query: str, limit: int = 2) -> List[str]:
