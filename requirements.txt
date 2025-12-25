@@ -1,7 +1,8 @@
 fastapi
 uvicorn
-qdrant-client
+qdrant-client==1.7.0
 langgraph
 pydantic
 pytest
+
 httpx
